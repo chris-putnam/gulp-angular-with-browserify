@@ -10,11 +10,10 @@ var tsdJson = 'tsd.json';
 var tsdApi = new tsd.getAPI(tsdJson);
 
 gulp.task('tsd:install', function () {
-  var bower = require(path.join(process.cwd(), 'bower.json'));
+  var tsdConfig = require(path.join(process.cwd(), 'package.json'));
 
   var dependencies = [].concat(
-    Object.keys(bower.dependencies),
-    Object.keys(bower.devDependencies)
+    Object.keys(tsdConfig.typescriptDefinitons)
   );
 
   var query = new tsd.Query();

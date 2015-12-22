@@ -7,25 +7,27 @@
  */
 
 var gutil = require('gulp-util');
+var path = require('path');
 
 /**
  *  The main paths of your project handle these with care
  */
-exports.paths = {
+var paths = {
   src: 'src',
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e'
 };
 
-/**
- *  Wiredep is the lib which inject bower dependencies in your project
- *  Mainly used to inject script tags in the index.html but also used
- *  to inject css preprocessor deps and js files in karma
- */
-exports.wiredep = {
-  exclude: [/bootstrap.js$/, /bootstrap-sass-official\/.*\.js/, /bootstrap\.css/],
-  directory: 'bower_components'
+exports.paths = paths;
+
+exports.browserify = {
+  bundleConfigs: [{
+    paths: ['../node_modules'],
+    entries: path.join(paths.src, '/app/modules.js'),
+    dest: path.join(paths.tmp, '/serve/app'),
+    outputName: 'modules.js'
+  }]
 };
 
 /**
